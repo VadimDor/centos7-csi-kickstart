@@ -1,0 +1,3 @@
+[submodule "hardened-centos7-kickstart"]
+	path = hardened-centos7-kickstart
+	url = https://github.com/VadimDor/hardened-centos7-kickstart
