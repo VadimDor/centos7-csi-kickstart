@@ -11,8 +11,7 @@ wget http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64/images/pxeboot/ini
 wget http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64/images/pxeboot/vmlinuz
 mv vmlinuz vmlinuz.cent.pxe 2>/dev/null
 mv initrd.img initrd.img.cent.pxe 2>/dev/null
-yum install -y git
-git clone 
+wget  https://github.com/VadimDor/centos7-csi-kickstart/blob/master/prepare_server.sh
 
 
 #DNS : cat /etc/resolv.conf |grep -i nameserver|head -n1|cut -d ' ' -f2
