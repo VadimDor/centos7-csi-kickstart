@@ -1,0 +1,10 @@
+## STOCK CONFIGURATIONS (Minimal Install)
+# Default SSG Profile (DISA STIG)
+# Run Hardening Script
+self.profile='xccdf_org.ssgproject.content_profile_stig-rhel7-disa'
+/usr/bin/oscap xccdf eval --profile $self.profile --remediate --results /root/`hostname`-ssg-results.xml /usr/share/xml/scap/ssg/content/ssg-centos7-ds.xml
+# Firewall Configuration
+firewall-cmd --permanent --add-service=ssh
+firewall-cmd --reload
+# Runlevel Configuration
+systemctl set-default multi-user.target
