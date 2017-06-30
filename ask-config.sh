@@ -95,9 +95,36 @@ sed -i -e 's/@@bootuser@@/$bootuser/g' /boot/hardened-centos.sh
 bootuser_grub=`echo -e 'mypass\nmypass' | grub2-mkpasswd-pbkdf2 | awk '/grub.pbkdf/{print$NF}'`
 sed -i -e 's/@@bootuser_grub@@/$bootuser_grub/g' /boot/hardened-centos.sh
 
-
-
-
+###########################################
+# FIPS 140-2 Configuration
+/bin/touch /tmp/fips-packages
+read -p "Do you want to add  crypto support acc.U.S.Federal Information Processing Standard (FIPS 140-2)(y|n, default Yes)?: " yYnN
+input=`echo $yNN|tr '[:upper:]' '[:lower:]'`
+if [[ -z "$input" ]] ||  [[$input == 'y']]; then
+  echo "dracut-fips" >> /tmp/fips-packages
+  echo "fipscheck" >> /tmp/fips-packages
+  # Enable FIPS 140-2 mode in Kernel
+	echo '\n/root/hardening/fips-kernel-mode.sh\n' >> /tmp/hardening-post
+  echo '\n/usr/bin/sed -i "s/ fips=1//" /etc/default/grub\n' >> /tmp/hardening-post
+  printf "Extra FIPS 140-2 support will be added\n"
+else
+  printf "No FIPS 140-2 support will be added\n"
+fi
+###########################################
+# Disable USB (nousb kernel option)
+read -p "Do you want to add  USB support (y|n, default No)?: " yYnN
+input=`echo $yNN|tr '[:upper:]' '[:lower:]'`
+if [[ -z "$input" ]] ||  [[$input == 'n']]; then
+  # Enable nousb mode in Kernel
+  echo '\ngrubby --update-kernel=ALL --args="nousb"\n' >> /tmp/hardening-post
+  echo '\n/usr/bin/sed -i "s/ quiet/quiet nousb/" /etc/default/grub\n' >> /tmp/hardening-post
+  printf "No USB support will be added\n"
+else
+  # Disable nousb mode in Kernel
+  echo '\n/root/hardening/fips-kernel-mode.sh\n' >> /tmp/hardening-post
+  echo '\ngrubby --update-kernel=ALL --remove-args="nousb"\n' >> /tmp/hardening-post
+  printf "USB support will be added\n"
+fi
 ###########################################
 echo "Known boot entries in GRUB-configuration currently show as boot disks the following:"
 cat /boot/grub2/grub.cfg|grep "set root="|cut -d '=' -f2
@@ -228,3 +255,15 @@ else
     printf "Foreman will be not installed\n"
 fi
 #########################################
+echo -e "\033[3m\033[1mWe have finished Setup of the Script\033[0m\033[0m"
+echo
+echo -e "\033[1mThis script downloads and starts tthe installation routine.\033[0m"
+echo
+echo -ne "\033[1mDo you want to continue?\033[0m [y/n]: "
+while read a; do
+case "$a" in
+	y|Y) break;;
+	n|N) exit 1;;
+	*) echo -n "[y/n]: ";;
+esac
+done

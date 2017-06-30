@@ -12,3 +12,6 @@ wget  https://raw.githubusercontent.com/VadimDor/centos7-csi-kickstart/master/as
 chmod +x /boot/ask-config.sh
 wget  https://raw.githubusercontent.com/VadimDor/hardened-centos7-kickstart/master/config/hardening/supplemental.cfg -O  /boot/supplemental.sh
 chmod +x /boot/supplemental.sh
+wget  https://raw.githubusercontent.com/VadimDor/hardened-centos7-kickstart/master/config/hardening/fips-kernel-mode.sh -O  /root/hardening/fips-kernel-mode.sh
+chmod +x /boot/fips-kernel-mode.sh
+wget  https://raw.githubusercontent.com/VadimDor/hardened-centos7-kickstart/master/config/hardening/scap-security-guide-0.1.33-Linux-content.rpm -O  /root/hardening/scap-security-guide-0.1.33-Linux-content.rpm
