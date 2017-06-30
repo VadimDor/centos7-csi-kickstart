@@ -12,18 +12,24 @@ wget http://centos.mirrors.ovh.net/ftp.centos.org/7/os/x86_64/images/pxeboot/vml
 mv vmlinuz vmlinuz.cent.pxe 2>/dev/null
 mv initrd.img initrd.img.cent.pxe 2>/dev/null
 
+
 #kernel /boot/vmlinuz.cent.pxe vnc vncpassword=pass123 headless ip=92.222.83.242 netmask=255.255.255.255 gateway=92.222.64.1 dns=213.186.33.99 ksdevice=eth0 method=http://ftp.hosteurope.de/mirror/centos.org/7/os/x86_64/ lang=en_US keymap=us
 
 #for options see https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-anaconda-boot-options.html
 
+####################################
 cat <<. > /boot/grub2/custom.cfg
  default=0
  timeout=15
  menuentry 'Centos Install (PXE)'  --class centos --class gnu-linux --class gnu --class os {
-  root=hd0,1
-  default=0
-  linux /boot/vmlinuz.cent.pxe  inst.ks=hd:sda1://root/ssg-rhel7-ospp-ks.cfg inst.headless ip=::::::dhcp    ksdevice=eth0 inst.vnc inst.vncconnect=213.85.1.125:5500
-  initrd /boot/initrd.img.cent.pxe
+load_video
+set gfxpayload=keep
+insmod gzio
+insmod part_msdos
+insmod xfs
+set root='@@boot_disk@@'
+  linux16 /vmlinuz.cent.pxe  inst.ks=hd:@@sda@@://hardened-centos.cfg inst.headless ip=::::::dhcp    ksdevice=@@eth0@@ @@inst.vnc@@ 
+  initrd16 /initrd.img.cent.pxe
  }
 .
 #inst.repo=http://ftp.hosteurope.de/mirror/centos.org/7/os/x86_64/ lang=en_US keymap=us
