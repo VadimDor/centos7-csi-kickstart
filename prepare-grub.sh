@@ -28,7 +28,7 @@ insmod gzio
 insmod part_msdos
 insmod xfs
 set root='@@boot_disk@@'
-  linux16 /vmlinuz.cent.pxe  inst.ks=hd:@@sda@@://hardened-centos.cfg inst.headless ip=::::::dhcp    ksdevice=@@eth0@@ @@inst.vnc@@ 
+  linux16 /vmlinuz.cent.pxe  inst.ks=hd:@@sda@@://hardened-centos.cfg inst.headless ip=::::::dhcp    ksdevice=@@eth0@@ @@inst.vnc@@
   initrd16 /initrd.img.cent.pxe
  }
 .

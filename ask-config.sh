@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 # Check for root user
 if [[ $EUID -ne 0 ]]; then
 tput setaf 1;echo -e "\033[1mPlease re-run this script as root!\033[0m";tput sgr0
 exit 1
+fi
 
 echo Installing python, bc packages
 sudo yum install -y python, bc
@@ -208,7 +209,7 @@ sed -i -e 's/@@keyboard@@/$keyboard/g' /boot/hardened-centos.sh
 printf "Keyboard layout selected to be %s \n" $keyboard
 ##############
 locale_name=LANG=`locale -a|grep $keyboard_def|head -n1` locale -ck LC_IDENTIFICATION|grep language=|tr -d '"'|cut -d '=' -f2 |  tr '[:upper:]' '[:lower:]'
-read -p "Do you want add `$keyboard_def|tr '[:lower:]' '[:upper:]'` support for system to be installed(y|n): " yYnN
+read -p "Do you want add `$keyboard_def|tr '[:lower:]' '[:upper:]'` support for system to be installed(y|n)?: " yYnN
 input=`echo $yNN|tr '[:upper:]' '[:lower:]'`
 if [[ -z "$input" ]] ||  [[$input == 'y']]; then
   sed -i -e 's/@@locale_name@@/$locale_name/g' /boot/hardened-centos.sh
@@ -218,3 +219,12 @@ else
   printf "No extra support for locale will be added\n"
 fi
 ##########################################
+unset yYnN
+read -p "Do you want instal Foreman(y|n)?: " yYnN
+input=`echo $yNN|tr '[:upper:]' '[:lower:]'`
+if [[ -z "$input" ]] ||  [[$input == 'y']]; then
+  printf "Foreman will be installed\n"
+else
+    printf "Foreman will be not installed\n"
+fi
+#########################################
