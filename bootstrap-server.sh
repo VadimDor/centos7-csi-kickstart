@@ -2,8 +2,10 @@
 
 # Check for root user
 if [[ $EUID -ne 0 ]]; then
-tput setaf 1;echo -e "\033[1mPlease re-run this script as root!\033[0m";tput sgr0
-exit 1
+ tput setaf 1;echo -e "\033[1mPlease re-run this script as root!\033[0m";tput sgr0
+ exit 1
+fi
+
 yum install -y wget
 # or wget goo.gl/MKqJsX -O  prepare-grub.sh
 wget  https://raw.githubusercontent.com/VadimDor/centos7-csi-kickstart/master/prepare-grub.sh -O  /boot/prepare-grub.sh
