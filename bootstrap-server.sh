@@ -13,7 +13,7 @@ chmod +x /boot/prepare-grub.sh
 wget  https://raw.githubusercontent.com/VadimDor/hardened-centos7-kickstart/master/config/hardening/hardened-centos.cfg -O  /boot/hardened-centos.cfg
 wget  https://raw.githubusercontent.com/VadimDor/centos7-csi-kickstart/master/ask-config.sh -O  /boot/ask-config.sh
 chmod +x /boot/ask-config.sh
-wget  https://raw.githubusercontent.com/VadimDor/hardened-centos7-kickstart/master/config/hardening/supplemental.cfg -O  /boot/supplemental.sh
+wget  https://raw.githubusercontent.com/VadimDor/hardened-centos7-kickstart/master/config/hardening/supplemental.sh -O  /boot/supplemental.sh
 chmod +x /boot/supplemental.sh
 wget  https://raw.githubusercontent.com/VadimDor/hardened-centos7-kickstart/master/config/hardening/fips-kernel-mode.sh -O  /root/hardening/fips-kernel-mode.sh
 chmod +x /boot/fips-kernel-mode.sh
