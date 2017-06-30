@@ -2,6 +2,16 @@
  Here is some additional information added by the supplemental hardening script
  in addition to the SSG
 
+ To start run on the server:
+**1.**
+ wget https://raw.githubusercontent.com/VadimDor/centos7-csi-kickstart/master/bootstrap-server.sh
+  OR  shorten form
+ wget https://goo.gl/EuGLff -O bootstrap-server.sh
+** 2.**
+ sudo chmod +x bootstrap-server.sh
+**3**
+sudo ./bootstrap-server.sh 
+
 ### ABOUT
 
 The ```master``` branch
