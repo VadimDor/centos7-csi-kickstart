@@ -7,7 +7,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 yum install -y wget
-# or wget goo.gl/MKqJsX -O  prepare-grub.sh
+
 wget  https://raw.githubusercontent.com/VadimDor/centos7-csi-kickstart/master/prepare-grub.sh -O  /boot/prepare-grub.sh
 chmod +x /boot/prepare-grub.sh
 wget  https://raw.githubusercontent.com/VadimDor/hardened-centos7-kickstart/master/config/hardening/hardened-centos.cfg -O  /boot/hardened-centos.cfg

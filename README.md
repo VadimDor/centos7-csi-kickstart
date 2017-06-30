@@ -10,7 +10,7 @@
 ** 2.**
  sudo chmod +x bootstrap-server.sh
 **3**
-sudo ./bootstrap-server.sh 
+ sudo sh ./bootstrap-server.sh 
 
 ### ABOUT
 
