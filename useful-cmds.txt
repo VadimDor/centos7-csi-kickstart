@@ -1,0 +1,15 @@
+
+#DNS : cat /etc/resolv.conf |grep -i nameserver|head -n1|cut -d ' ' -f2
+# serverip:  /sbin/ifconfig eth0 | awk '/inet/{ print $2;} '|head -n1
+# mask: /sbin/ifconfig eth0 | awk '/inet/{ print $4;} '|head -n1
+# gateway:  route -n  | awk '/0.0.0.0/{ print $2;} '|head -n1   OR route �N | grep UG
+# interface: /sbin/ifconfig -a  | awk '/BROADCAST/{ print $1;} '|head -n1|sed 's/://'
+# or interface: ifconfig | grep -o '^eth[0-9]\+'
+# hd(e.g. /dev/sda6 should read (hd0, 5):  fdisk -l
+#server name: uname -n
+#kernel: uname -r
+
+# 5
+#line_num="$(grep -n "^Model" ${ntp_conf} | cut -f1 -d:)"
+#sed -i "${line_num} a restrict -6 default kod nomodify notrap nopeer noquery" ${ntp_conf}
+#fi
